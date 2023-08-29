@@ -1,0 +1,17 @@
+{
+  "ignoreWords": [
+    "datetime",
+    "fastify",
+    "typeorm"
+  ],
+  "ignorePaths": [
+    "node_modules/**",
+    "dist/**",
+    "src/database/migrations/**"
+  ],
+  "ignoreRegExpList": [
+    "/.*secret: .*/g"
+  ],
+  "words": [
+  ]
+}
