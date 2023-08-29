@@ -1,0 +1,33 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npx lint-staged
+
+# validate branch name
+feat='feat\/[0-9]+(-[a-z0-9]+)+'
+fix='fix\/[0-9]+(-[a-z0-9]+)+'
+ut='ut\/[0-9]+(-[a-z0-9]+)+'
+chore='chore\/([a-z0-9])+(-[a-z0-9]+)?'
+perf='perf\/([a-z0-9])+(-[a-z0-9]+)?'
+refactor='refactor\/([a-z0-9])+(-[a-z0-9]+)?'
+revert='revert\/([a-z0-9])+(-[a-z0-9]+)?'
+
+branch_name_format="$feat|$fix|$ut|$chore|$perf|$refactor|$revert"
+error_msg="Push not allowed, branch name should starts with feat,ut,chore,fix or develop"
+BRANCH_NAME=$(git symbolic-ref --short HEAD)
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+echo "$BRANCH_NAME"
+if [[ ! $BRANCH_NAME =~ $branch_name_format ]]; then
+    echo "${RED}[Error] $error_msg${NC}" >&2
+    echo "Below are sample branch names"
+    echo "${BLUE}feat/1234-article-api"
+    echo "fix/1234-login-bug"
+    echo "chore/do-something"
+    echo "ut/article$NC"
+    exit 1
+else
+    echo "Push is successful"
+fi
