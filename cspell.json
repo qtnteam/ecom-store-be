@@ -2,7 +2,8 @@
   "ignoreWords": [
     "datetime",
     "fastify",
-    "typeorm"
+    "typeorm",
+    "01GYS4MFBRHRYQ4ENZEFBHPDA0"
   ],
   "ignorePaths": [
     "node_modules/**",
@@ -12,6 +13,5 @@
   "ignoreRegExpList": [
     "/.*secret: .*/g"
   ],
-  "words": [
-  ]
+  "words": []
 }
