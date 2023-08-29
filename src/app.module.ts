@@ -1,10 +1,9 @@
+// gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+
+import { DatabaseModule } from './database.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [DatabaseModule],
 })
 export class AppModule {}
