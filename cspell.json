@@ -3,6 +3,7 @@
     "datetime",
     "fastify",
     "typeorm",
+    "Ecom",
     "01GYS4MFBRHRYQ4ENZEFBHPDA0"
   ],
   "ignorePaths": [
