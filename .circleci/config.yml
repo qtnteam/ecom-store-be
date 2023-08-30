@@ -6,9 +6,20 @@ jobs:
       - image: cimg/node:16.20.0
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
-          command: yarn install && yarn build
-          name: Run install and build
+          command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+          name: Run install
+      - save_cache:
+          name: Save yarn package cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run:
+          command: yarn build
+          name: Run build
       - run:
           command: yarn test
           name: Run tests
