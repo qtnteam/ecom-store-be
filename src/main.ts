@@ -7,6 +7,7 @@ import {
 } from '@nestjs/platform-fastify';
 
 import { AppModule } from './app.module';
+import { configSwagger } from './shared/utils/setup-swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -16,6 +17,19 @@ async function bootstrap() {
 
   // Get config of app.
   const config = app.get<ConfigService>(ConfigService);
+
+  // Config swagger
+  if (config.get('appEnv') === 'dev') {
+    await configSwagger(app);
+  }
+
+  // CORS
+  // TODO fix origin config get from env
+  app.enableCors({
+    origin: ['*'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH'],
+    credentials: true,
+  });
 
   // Run app with port
   await app.listen(config.get('port'), '0.0.0.0');
