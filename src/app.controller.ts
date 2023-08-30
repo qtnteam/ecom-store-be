@@ -1,4 +1,6 @@
+// gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
 import { Controller, Get } from '@nestjs/common';
+
 import { AppService } from './app.service';
 
 @Controller()
