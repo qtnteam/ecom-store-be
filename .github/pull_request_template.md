@@ -1,6 +1,6 @@
 ## Related Issues
 
-- [#IssuesID](https://github.com/vtthanhit/ecom-store-be/issues/IssuesID)
+- [#IssuesID](https://github.com/qtnteam/ecom-store-be/issues/IssuesID)
 
 ## What's this PR do ?
 
