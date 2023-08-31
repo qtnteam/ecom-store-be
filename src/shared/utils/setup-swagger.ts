@@ -2,7 +2,7 @@
 import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
-export async function configSwagger(app: INestApplication) {
+export function configSwagger(app: INestApplication) {
   const documentBuilder = new DocumentBuilder()
     .setTitle('Ecom Store')
     .setDescription('The Ecom Store API description')

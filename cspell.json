@@ -4,7 +4,8 @@
     "fastify",
     "typeorm",
     "Ecom",
-    "01GYS4MFBRHRYQ4ENZEFBHPDA0"
+    "01GYS4MFBRHRYQ4ENZEFBHPDA0",
+    "Ho_Chi_Minh"
   ],
   "ignorePaths": [
     "node_modules/**",
