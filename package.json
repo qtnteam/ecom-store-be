@@ -27,7 +27,8 @@
     "m:c": "typeorm migration:create ./src/database/migrations/$name",
     "m:up": "npm run typeorm migration:run",
     "m:r": "npm run typeorm migration:revert",
-    "m:g": "npm run typeorm migration:generate -n ./src/database/migrations/$name"
+    "m:g": "npm run typeorm migration:generate",
+    "batch": "node dist/main-cli.js"
   },
   "dependencies": {
     "@fastify/static": "^6.10.2",
@@ -40,6 +41,7 @@
     "class-transformer": "^0.5.1",
     "cli-color": "^2.0.3",
     "mysql2": "^3.6.0",
+    "nest-commander": "^3.12.0",
     "nest-winston": "^1.9.4",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",

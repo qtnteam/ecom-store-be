@@ -5,7 +5,8 @@
     "typeorm",
     "Ecom",
     "01GYS4MFBRHRYQ4ENZEFBHPDA0",
-    "Ho_Chi_Minh"
+    "Ho_Chi_Minh",
+    "tinyint"
   ],
   "ignorePaths": [
     "node_modules/**",
