@@ -1,4 +1,9 @@
 // gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
+import {
+  HttpStatus,
+  UnprocessableEntityException,
+  ValidationPipe,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import {
@@ -70,6 +75,15 @@ async function bootstrap() {
   if (config.get('appEnv') === 'dev') {
     configSwagger(app);
   }
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
+      transform: true,
+      exceptionFactory: (errors) => new UnprocessableEntityException(errors),
+    }),
+  );
 
   // Run app with port
   await app.listen(config.get('port'), '0.0.0.0');

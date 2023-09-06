@@ -1,6 +1,7 @@
 // gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
 import { Column, Entity, OneToMany } from 'typeorm';
 
+import { EntityConstant } from '@/constants/entity.constant';
 import { Store } from '@/modules/store/entities/store.entity';
 import { AbstractEntity } from '@/shared/common/base.entity';
 import { UseDto } from '@/shared/decorators/use-dto.decorator';
@@ -18,8 +19,32 @@ export class User
   stores: Store[];
 
   @Column({
-    name: 'name',
+    name: 'username',
     type: 'varchar',
+    length: EntityConstant.EntityShortLength,
   })
-  name: string;
+  username: string;
+
+  @Column({
+    name: 'phone_number',
+    type: 'varchar',
+    length: EntityConstant.EntityPhoneLength,
+    unique: true,
+  })
+  phoneNumber: string;
+
+  @Column({
+    name: 'email',
+    type: 'varchar',
+    length: EntityConstant.EntityShortLength,
+    unique: true,
+  })
+  email: string;
+
+  @Column({
+    name: 'password',
+    type: 'varchar',
+    length: EntityConstant.EntityShortLength,
+  })
+  password: string;
 }

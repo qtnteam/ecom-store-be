@@ -1,8 +1,8 @@
 // gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class CreateStoreTable1694414705938 implements MigrationInterface {
-  name = 'CreateStoreTable1694414705938';
+export class CreateTableStore1694546745347 implements MigrationInterface {
+  name = 'CreateTableStore1694546745347';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
@@ -16,10 +16,10 @@ export class CreateStoreTable1694414705938 implements MigrationInterface {
         \`identifier\` varchar(255) NOT NULL,
         \`thumbnail\` varchar(255) NULL,
         \`description\` varchar(1024) NOT NULL,
-        INDEX \`IDX_3367aeed14d200757b88b9f6de\` (\`name\`,\`identifier\`), 
-        UNIQUE INDEX \`IDX_ad98b8815a66c29442fe90b0eb\` (\`identifier\`), 
+        INDEX \`IDX_3367aeed14d200757b88b9f6de\` (\`name\`, \`identifier\`),
+        UNIQUE INDEX \`IDX_ad98b8815a66c29442fe90b0eb\` (\`identifier\`),
         PRIMARY KEY (\`id\`)
-      ) ENGINE=InnoDB COLLATE utf8mb4_general_ci`,
+        ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE utf8mb4_general_ci`,
     );
     await queryRunner.query(
       `ALTER TABLE \`stores\` ADD CONSTRAINT \`FK_29f39971656b4bf7832b7476d10\` FOREIGN KEY (\`user_id\`) REFERENCES \`users\`(\`id\`) ON DELETE NO ACTION ON UPDATE NO ACTION`,
