@@ -6,12 +6,14 @@
     "Ecom",
     "01GYS4MFBRHRYQ4ENZEFBHPDA0",
     "Ho_Chi_Minh",
-    "tinyint"
+    "tinyint",
+    "libphonenumber"
   ],
   "ignorePaths": [
     "node_modules/**",
     "dist/**",
-    "src/database/migrations/**"
+    "src/database/migrations/**",
+    "src/languages/vi/**"
   ],
   "ignoreRegExpList": [
     "/.*secret: .*/g"

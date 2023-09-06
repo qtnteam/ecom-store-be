@@ -8,17 +8,9 @@ import {
 
 import { EntityConstant } from '@/constants/entity.constant';
 
+import { IAbstractEntity } from '../interfaces';
 import { AbstractDto } from './dto/abstract.dto';
 import { Constructor } from './type/constructor';
-
-export interface IAbstractEntity<DTO extends AbstractDto, O = never> {
-  id: string;
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt?: Date;
-
-  toDto(options?: O): DTO;
-}
 
 export abstract class AbstractEntity<
   DTO extends AbstractDto = AbstractDto,
