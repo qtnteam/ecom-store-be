@@ -1,4 +1,6 @@
 // gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
+import { ValidationError } from 'class-validator';
+
 import { AbstractDto } from '../common/dto/abstract.dto';
 
 // Entity interface
@@ -42,3 +44,8 @@ export interface IStringFieldOptions extends IFieldOptions {
 
 export type IBooleanFieldOptions = IFieldOptions;
 export type IEnumFieldOptions = IFieldOptions;
+
+// Validation interface
+export interface IndexedValidationError extends ValidationError {
+  index?: number;
+}

@@ -87,7 +87,7 @@ export const NumberField = (
   if (options.isPositive) {
     propertyDecorators.push(
       IsPositive({
-        message: ValidationMessage.M_25_isPositive,
+        message: ValidationMessage.M_17_isPositive,
         each: options.each,
       }),
     );
@@ -241,7 +241,7 @@ export const EmailField = (
 ): PropertyDecorator => {
   return applyDecorators(
     StringField({ toLowerCase: true, ...options }),
-    IsEmail({}, { message: ValidationMessage.M_34_invalidEmail }),
+    IsEmail({}, { message: ValidationMessage.M_18_invalidEmail }),
   );
 };
 
