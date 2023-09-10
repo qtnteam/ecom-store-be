@@ -7,4 +7,10 @@ export const LoggerConstant = {
   parameterPrefix: ' -- PARAMETERS: ',
   queryLogLevels: ['log', 'warn', 'query', 'schema', 'migration'],
   startQueryInsert: 'INSERT INTO',
+  badRequest: 'Completed 400 Bad Request',
+  notFound: 'Completed 404 Not Found',
+  forbidden: 'Completed 403 Forbidden',
+  unauthorized: 'Completed 401 Unauthorized',
+  unprocessable: 'Completed 422 Unprocessable',
+  internalServer: 'INTERNAL SERVER ERROR',
 };

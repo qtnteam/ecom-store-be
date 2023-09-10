@@ -186,7 +186,7 @@ export function IsPhoneNumber(
   },
 ): PropertyDecorator {
   return isPhoneNumber(options?.region, {
-    message: ValidationMessage.M_18_phoneRule,
+    message: ValidationMessage.M_16_phoneRule,
     ...options,
   });
 }

@@ -8,6 +8,12 @@ import {
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
 import { AppModule } from './app.module';
+import { BadRequestExceptionFilter } from './shared/filters/bad-request.filter';
+import { EntityNotFoundExceptionFilter } from './shared/filters/entity-not-found.filter';
+import { ForbiddenExceptionFilter } from './shared/filters/forbidden.filter';
+import { InternalServerFilter } from './shared/filters/internal-server.filter';
+import { UnauthorizedExceptionFilter } from './shared/filters/unauthorized.filter';
+import { UnprocessableEntityExceptionFilter } from './shared/filters/unprocessable-entity.filter';
 import { configSwagger } from './shared/utils/setup-swagger';
 
 async function bootstrap() {
@@ -31,7 +37,18 @@ async function bootstrap() {
   app.setGlobalPrefix('api/v1');
 
   // Apply winston logger for app
-  app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
+  const logger = app.get(WINSTON_MODULE_NEST_PROVIDER);
+  app.useLogger(logger);
+
+  // Config exception filter
+  app.useGlobalFilters(
+    new BadRequestExceptionFilter(logger),
+    new EntityNotFoundExceptionFilter(logger),
+    new ForbiddenExceptionFilter(logger),
+    new InternalServerFilter(logger),
+    new UnauthorizedExceptionFilter(logger),
+    new UnprocessableEntityExceptionFilter(logger),
+  );
 
   // Config swagger
   if (config.get('appEnv') === 'dev') {

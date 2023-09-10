@@ -3,8 +3,9 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 
 import { EntityConstant } from '@/constants/entity.constant';
 import { CategoryLevelEnum } from '@/constants/enum';
-import { AbstractEntity, IAbstractEntity } from '@/shared/common/base.entity';
+import { AbstractEntity } from '@/shared/common/base.entity';
 import { UseDto } from '@/shared/decorators/use-dto.decorator';
+import { IAbstractEntity } from '@/shared/interfaces';
 
 import { CategoryDto } from '../dto/category.dto';
 
