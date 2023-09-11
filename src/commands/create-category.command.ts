@@ -5,8 +5,8 @@ import { Command, CommandRunner } from 'nest-commander';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { DataSource, EntityManager, In, Repository } from 'typeorm';
 
-import { CategoryLevelEnum } from '@/constants/enum';
 import { Category } from '@/modules/category/entities/category.entity';
+import { CategoryLevelEnum } from '@/shared/enum';
 
 @Command({
   name: 'create-categories',
