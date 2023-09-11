@@ -5,3 +5,9 @@ export enum CategoryLevelEnum {
   Level3,
   Level4,
 }
+
+export enum StoreAddressEnum {
+  Default = 1,
+  DepositWarehouse,
+  ReturnWarehouse,
+}

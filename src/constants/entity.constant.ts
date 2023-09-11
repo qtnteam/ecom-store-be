@@ -2,6 +2,7 @@
 export const EntityConstant = {
   // Common
   EntityShortLength: 255,
+  EntityMediumLength: 1024,
 
   // Other
   TimePrecision: 0,
