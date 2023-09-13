@@ -16,6 +16,7 @@ import { InternalServerFilter } from './shared/filters/internal-server.filter';
 import { UnauthorizedExceptionFilter } from './shared/filters/unauthorized.filter';
 import { UnprocessableEntityExceptionFilter } from './shared/filters/unprocessable-entity.filter';
 import { LoggerRequestGuard } from './shared/guards/logger-request.guard';
+import { ResponseInterceptor } from './shared/interceptors/response.interceptor';
 import { configSwagger } from './shared/utils/setup-swagger';
 
 async function bootstrap() {
@@ -46,6 +47,9 @@ async function bootstrap() {
     asyncRequestContext: app.get(AsyncRequestContext),
     logger,
   };
+
+
+  app.useGlobalInterceptors(new ResponseInterceptor(filterParam));
 
   // Config exception filter
   app.useGlobalFilters(
