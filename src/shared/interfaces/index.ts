@@ -4,7 +4,10 @@ import { ValidationError } from 'class-validator';
 import { AbstractDto } from '../common/dto/abstract.dto';
 
 // Entity interface
-export interface IAbstractEntity<DTO extends AbstractDto, O = never> {
+export interface IAbstractEntity<
+  DTO extends AbstractDto = AbstractDto,
+  O = never,
+> {
   id: string;
   createdAt: Date;
   updatedAt: Date;

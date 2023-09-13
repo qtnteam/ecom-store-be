@@ -3,18 +3,11 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 
 import { EntityConstant } from '@/constants/entity.constant';
 import { AbstractEntity } from '@/shared/common/base.entity';
-import { UseDto } from '@/shared/decorators/use-dto.decorator';
 import { CategoryLevelEnum } from '@/shared/enum';
 import { IAbstractEntity } from '@/shared/interfaces';
 
-import { CategoryDto } from '../dto/category.dto';
-
 @Entity('categories')
-@UseDto(CategoryDto)
-export class Category
-  extends AbstractEntity<CategoryDto>
-  implements IAbstractEntity<CategoryDto>
-{
+export class Category extends AbstractEntity implements IAbstractEntity {
   @ManyToOne(() => Category, (category) => category.childCategories)
   @JoinColumn({ name: 'parent_id' })
   parentCategory: Category;
