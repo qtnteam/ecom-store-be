@@ -5,7 +5,6 @@ import {
   ExceptionFilter,
   HttpException,
   HttpStatus,
-  Logger,
   UnauthorizedException,
 } from '@nestjs/common';
 import { FastifyReply } from 'fastify';
@@ -13,23 +12,33 @@ import { FastifyReply } from 'fastify';
 import { LoggerConstant } from '@/constants/logger.constant';
 import { ErrorMessage } from '@/languages';
 
+import { ExceptionFilterType } from '../common/type';
+
 @Catch(UnauthorizedException)
 export class UnauthorizedExceptionFilter
   implements ExceptionFilter<HttpException>
 {
-  constructor(private readonly logger: Logger) {}
+  constructor(private readonly filterParam: ExceptionFilterType) {}
   catch(exception: HttpException, host: ArgumentsHost) {
+    const { logger, asyncRequestContext } = this.filterParam;
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<FastifyReply>();
     const status = HttpStatus.FORBIDDEN;
 
-    // TODO config store later with contextId, ip, device, domain, userId, endpoint later
-    this.logger.log(LoggerConstant.unauthorized);
+    logger.log(
+      LoggerConstant.unauthorized,
+      asyncRequestContext.getRequestIdStore(),
+    );
 
     const error = {
       statusCode: status,
-      message: ErrorMessage[status],
+      message:
+        exception.message && exception.message !== 'Unauthorized'
+          ? exception.message
+          : ErrorMessage[status],
     };
+
+    asyncRequestContext.exit();
 
     return response.code(status).send(error);
   }

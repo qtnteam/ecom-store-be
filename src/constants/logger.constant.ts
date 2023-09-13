@@ -7,6 +7,8 @@ export const LoggerConstant = {
   parameterPrefix: ' -- PARAMETERS: ',
   queryLogLevels: ['log', 'warn', 'query', 'schema', 'migration'],
   startQueryInsert: 'INSERT INTO',
+  typeOrmFirstQuery: 'TypeOrm First Query',
+  success: 'Complete 200 OK',
   badRequest: 'Completed 400 Bad Request',
   notFound: 'Completed 404 Not Found',
   forbidden: 'Completed 403 Forbidden',

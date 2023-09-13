@@ -8,12 +8,15 @@ import {
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
 import { AppModule } from './app.module';
+import { AsyncRequestContext } from './async-request-context/async-request-context.service';
 import { BadRequestExceptionFilter } from './shared/filters/bad-request.filter';
 import { EntityNotFoundExceptionFilter } from './shared/filters/entity-not-found.filter';
 import { ForbiddenExceptionFilter } from './shared/filters/forbidden.filter';
 import { InternalServerFilter } from './shared/filters/internal-server.filter';
 import { UnauthorizedExceptionFilter } from './shared/filters/unauthorized.filter';
 import { UnprocessableEntityExceptionFilter } from './shared/filters/unprocessable-entity.filter';
+import { LoggerRequestGuard } from './shared/guards/logger-request.guard';
+import { ResponseInterceptor } from './shared/interceptors/response.interceptor';
 import { configSwagger } from './shared/utils/setup-swagger';
 
 async function bootstrap() {
@@ -40,15 +43,24 @@ async function bootstrap() {
   const logger = app.get(WINSTON_MODULE_NEST_PROVIDER);
   app.useLogger(logger);
 
+  const filterParam = {
+    asyncRequestContext: app.get(AsyncRequestContext),
+    logger,
+  };
+
+  app.useGlobalInterceptors(new ResponseInterceptor(filterParam));
+
   // Config exception filter
   app.useGlobalFilters(
-    new BadRequestExceptionFilter(logger),
-    new EntityNotFoundExceptionFilter(logger),
-    new ForbiddenExceptionFilter(logger),
-    new InternalServerFilter(logger),
-    new UnauthorizedExceptionFilter(logger),
-    new UnprocessableEntityExceptionFilter(logger),
+    new InternalServerFilter(filterParam),
+    new BadRequestExceptionFilter(filterParam),
+    new UnprocessableEntityExceptionFilter(filterParam),
+    new UnauthorizedExceptionFilter(filterParam),
+    new EntityNotFoundExceptionFilter(filterParam),
+    new ForbiddenExceptionFilter(filterParam),
   );
+
+  app.useGlobalGuards(new LoggerRequestGuard(filterParam));
 
   // Config swagger
   if (config.get('appEnv') === 'dev') {
