@@ -48,6 +48,7 @@ async function bootstrap() {
     logger,
   };
 
+
   app.useGlobalInterceptors(new ResponseInterceptor(filterParam));
 
   // Config exception filter
