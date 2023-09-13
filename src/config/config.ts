@@ -2,6 +2,7 @@
 export default () => ({
   appEnv: process.env.NODE_ENV,
   port: parseInt(process.env.APP_PORT, 10) || 3000,
+  tz: process.env.TZ || 'Asia/Ho_Chi_Minh',
   database: {
     type: process.env.DATABASE_DRIVER as 'mysql',
     host: process.env.DATABASE_HOST,

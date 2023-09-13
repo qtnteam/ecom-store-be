@@ -5,29 +5,35 @@ import {
   ExceptionFilter,
   HttpException,
   HttpStatus,
-  Logger,
 } from '@nestjs/common';
 import type { FastifyReply } from 'fastify';
 
 import { LoggerConstant } from '@/constants/logger.constant';
 import { ErrorMessage } from '@/languages';
 
+import { ExceptionFilterType } from '../common/type';
+
 @Catch()
 export class InternalServerFilter implements ExceptionFilter<HttpException> {
-  constructor(private readonly logger: Logger) {}
+  constructor(private readonly filterParam: ExceptionFilterType) {}
 
-  catch(_exception: HttpException, host: ArgumentsHost) {
+  catch(exception: HttpException, host: ArgumentsHost) {
+    const { logger, asyncRequestContext } = this.filterParam;
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<FastifyReply>();
     const status = HttpStatus.INTERNAL_SERVER_ERROR;
 
-    // TODO config store later with contextId, ip, device, domain, userId, endpoint later
-    this.logger.log(LoggerConstant.internalServer);
+    logger.log(
+      LoggerConstant.internalServer,
+      asyncRequestContext.getRequestIdStore(),
+    );
 
     const error = {
       statusCode: status,
-      message: ErrorMessage[status],
+      message: exception.message || ErrorMessage[status],
     };
+
+    asyncRequestContext.exit();
 
     return response.code(status).send(error);
   }

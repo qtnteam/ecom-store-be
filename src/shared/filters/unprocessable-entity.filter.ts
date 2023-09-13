@@ -5,7 +5,6 @@ import {
   ExceptionFilter,
   HttpException,
   HttpStatus,
-  Logger,
   UnprocessableEntityException,
 } from '@nestjs/common';
 import { FastifyReply } from 'fastify';
@@ -14,15 +13,16 @@ import * as isEmpty from 'lodash/isEmpty';
 import { LoggerConstant } from '@/constants/logger.constant';
 import { Attributes, ErrorMessage } from '@/languages';
 
-import { ValidationErrorFilterType } from '../common/type';
+import { ExceptionFilterType, ValidationErrorFilterType } from '../common/type';
 import { IndexedValidationError } from '../interfaces';
 
 @Catch(UnprocessableEntityException)
 export class UnprocessableEntityExceptionFilter
   implements ExceptionFilter<HttpException>
 {
-  constructor(private readonly logger: Logger) {}
+  constructor(private readonly filterParam: ExceptionFilterType) {}
   catch(exception: HttpException, host: ArgumentsHost) {
+    const { logger, asyncRequestContext } = this.filterParam;
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<FastifyReply>();
     const status = HttpStatus.UNPROCESSABLE_ENTITY;
@@ -30,8 +30,10 @@ export class UnprocessableEntityExceptionFilter
     const validationErrors =
       exception.getResponse() as ValidationErrorFilterType;
 
-    // TODO config store later with contextId, ip, device, domain, userId, endpoint later
-    this.logger.log(LoggerConstant.unprocessable);
+    logger.log(
+      LoggerConstant.unprocessable,
+      asyncRequestContext.getRequestIdStore(),
+    );
 
     const messages = this.validationFilter(validationErrors.message);
 
@@ -40,6 +42,8 @@ export class UnprocessableEntityExceptionFilter
       message: ErrorMessage[status],
       details: messages,
     };
+
+    asyncRequestContext.exit();
 
     return response.code(status).send(error);
   }
