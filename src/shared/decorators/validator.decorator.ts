@@ -42,6 +42,26 @@ export const IsPassword = (options?: ValidationOptions): PropertyDecorator => {
   };
 };
 
+export const IsUserName = (options?: ValidationOptions): PropertyDecorator => {
+  return (object, propertyName: string) => {
+    registerDecorator({
+      propertyName,
+      name: 'isUserName',
+      target: object.constructor,
+      constraints: [],
+      options: {
+        ...options,
+        message: ValidationMessage.M_19_userNameRule,
+      },
+      validator: {
+        validate(value: string) {
+          return RegexConstant.UsernameFormat.test(value);
+        },
+      },
+    });
+  };
+};
+
 export const Match = (
   property: string,
   options?: ValidationOptions,

@@ -1,10 +1,10 @@
 // gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class CreateStoreAddressTable1694415001196
+export class CreateTableStoreAddress1694748732469
   implements MigrationInterface
 {
-  name = 'CreateStoreAddressTable1694415001196';
+  name = 'CreateTableStoreAddress1694748732469';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
@@ -18,7 +18,7 @@ export class CreateStoreAddressTable1694415001196
         \`type\` tinyint UNSIGNED NOT NULL DEFAULT '1',
         INDEX \`IDX_3163fabd1dc51598d5a689f7a0\` (\`address\`),
         PRIMARY KEY (\`id\`)
-      ) ENGINE=InnoDB COLLATE utf8mb4_general_ci`,
+        ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE utf8mb4_general_ci`,
     );
     await queryRunner.query(
       `ALTER TABLE \`store-addresses\` ADD CONSTRAINT \`FK_eb8f4c90d2ce2846308a3ad39d8\` FOREIGN KEY (\`store_id\`) REFERENCES \`stores\`(\`id\`) ON DELETE NO ACTION ON UPDATE NO ACTION`,
