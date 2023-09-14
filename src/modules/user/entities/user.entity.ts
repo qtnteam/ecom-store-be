@@ -47,4 +47,20 @@ export class User
     length: EntityConstant.EntityShortLength,
   })
   password: string;
+
+  @Column({
+    name: 'access_token',
+    type: 'varchar',
+    length: EntityConstant.EntityLongLength,
+    nullable: true,
+  })
+  accessToken: string;
+
+  @Column({
+    name: 'refresh_token',
+    type: 'varchar',
+    length: EntityConstant.EntityLongLength,
+    nullable: true,
+  })
+  refreshToken: string;
 }

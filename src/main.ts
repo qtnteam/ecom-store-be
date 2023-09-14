@@ -5,7 +5,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { NestFactory } from '@nestjs/core';
+import { NestFactory, Reflector } from '@nestjs/core';
 import {
   FastifyAdapter,
   NestFastifyApplication,
@@ -14,6 +14,8 @@ import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 
 import { AppModule } from './app.module';
 import { AsyncRequestContext } from './async-request-context/async-request-context.service';
+import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { AppConstant } from './constants/app.constant';
 import { BadRequestExceptionFilter } from './shared/filters/bad-request.filter';
 import { EntityNotFoundExceptionFilter } from './shared/filters/entity-not-found.filter';
 import { ForbiddenExceptionFilter } from './shared/filters/forbidden.filter';
@@ -37,7 +39,10 @@ async function bootstrap() {
   // CORS
   // TODO fix origin config get from env
   app.enableCors({
-    origin: ['*'],
+    origin:
+      config.get<string>('appEnv') === AppConstant.dev
+        ? [config.get('appUrl'), 'https://localhost:3000']
+        : config.get('appUrl'),
     methods: ['GET', 'POST', 'PUT', 'PATCH'],
     credentials: true,
   });
@@ -69,7 +74,10 @@ async function bootstrap() {
     new ForbiddenExceptionFilter(filterParam),
   );
 
-  app.useGlobalGuards(new LoggerRequestGuard(filterParam));
+  app.useGlobalGuards(
+    new LoggerRequestGuard(filterParam),
+    new JwtAuthGuard(app.get(Reflector)),
+  );
 
   // Config swagger
   if (config.get('appEnv') === 'dev') {
