@@ -6,4 +6,5 @@ export const AppConstant = {
   numDigitsHidden: 6,
   characterHidden: '*',
   maxCharacterLog: 200,
+  saltOrRounds: 10,
 };
