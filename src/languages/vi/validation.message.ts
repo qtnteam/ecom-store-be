@@ -27,5 +27,5 @@ export const ValidationMessage = {
   M_17_isPositive: 'Vui lòng nhập số nguyên không dấu',
   M_18_invalidEmail: 'Vui lòng nhập địa chỉ email hợp lệ',
   M_19_userNameRule: 'Thông tin tài khoản không chứa kí tự đặc biệt',
-  M_20_errorExist: 'Thông tin tài khoản đã tồn tại',
+  M_20_registerUserExist: '$field đã tồn tại',
 };

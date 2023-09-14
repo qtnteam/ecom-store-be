@@ -4,7 +4,12 @@ export const EntityConstant = {
   EntityShortLength: 255,
   EntityMediumLength: 1024,
 
+  // User
+  EntityPasswordMinLength: 8,
+  EntityPasswordMaxLength: 50,
+
   // Other
   TimePrecision: 0,
   EntityPhoneLength: 12,
+  RegisterFieldCheckExists: ['username', 'phoneNumber', 'email'],
 };

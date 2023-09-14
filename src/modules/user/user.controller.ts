@@ -3,6 +3,7 @@ import { Body, Controller, Post } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { RegisterUserDto } from './dto/register-user.dto';
+import { UserDto } from './dto/user.dto';
 import { UsersService } from './user.service';
 
 @ApiTags('User')
@@ -12,7 +13,7 @@ export class UsersController {
 
   @Post()
   @ApiOkResponse({ type: RegisterUserDto })
-  async create(@Body() registerUserDto: RegisterUserDto) {
+  async create(@Body() registerUserDto: RegisterUserDto): Promise<UserDto> {
     return this.usersServices.registerUser(registerUserDto);
   }
 }
