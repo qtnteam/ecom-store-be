@@ -1,4 +1,5 @@
 // gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
+// gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
@@ -6,6 +7,7 @@ import { Repository } from 'typeorm';
 
 import { AppConstant } from '@/constants/app.constant';
 import { EntityConstant } from '@/constants/entity.constant';
+import { District } from '@/modules/district/entities/district.entity';
 import { RegisterUserExistException } from '@/shared/exception/register-user-exist.exception';
 
 import { RegisterUserDto } from './dto/register-user.dto';
@@ -17,6 +19,9 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+
+    @InjectRepository(District)
+    private readonly dRepository: Repository<District>,
   ) {}
 
   async registerUser(registerUserDto: RegisterUserDto): Promise<UserDto> {
@@ -71,5 +76,15 @@ export class UserService {
     refreshToken: string,
   ): Promise<void> {
     await this.userRepository.update(id, { accessToken, refreshToken });
+  }
+
+  async test(provinceId = '01') {
+    const de = await this.dRepository
+      .createQueryBuilder('a')
+      .innerJoinAndSelect('a.province', 'p')
+      .where('a.provinceId = :provinceId', { provinceId })
+      .getMany();
+
+    return de;
   }
 }
