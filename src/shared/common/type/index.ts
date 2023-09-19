@@ -31,3 +31,10 @@ export type ExceptionFilterType = {
 };
 
 export type ObjectType = { [key: string]: any };
+
+export type Payload = {
+  username: string;
+  exp: number;
+  iat: number;
+  sub: string;
+};

@@ -13,7 +13,7 @@ import { UserDto } from './dto/user.dto';
 import { User } from './entities/user.entity';
 
 @Injectable()
-export class UsersService {
+export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
@@ -45,5 +45,31 @@ export class UsersService {
 
     user.password = bcrypt.hashSync(user.password, AppConstant.saltOrRounds);
     return (await this.userRepository.save(user)).toDto();
+  }
+
+  async findUserActive(
+    identifier: string,
+    accessToken?: string,
+  ): Promise<User> {
+    const queryBuilder = await this.userRepository.createQueryBuilder('u');
+
+    queryBuilder.where(
+      '(u.username = :identifier OR u.email = :identifier OR u.phone_number = :identifier)',
+      { identifier },
+    );
+
+    if (accessToken) {
+      queryBuilder.andWhere('u.access_token = :accessToken', { accessToken });
+    }
+
+    return queryBuilder.getOne();
+  }
+
+  async updateToken(
+    id: string,
+    accessToken: string,
+    refreshToken: string,
+  ): Promise<void> {
+    await this.userRepository.update(id, { accessToken, refreshToken });
   }
 }

@@ -4,16 +4,16 @@ import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { RegisterUserDto } from './dto/register-user.dto';
 import { UserDto } from './dto/user.dto';
-import { UsersService } from './user.service';
+import { UserService } from './user.service';
 
 @ApiTags('User')
 @Controller('user')
-export class UsersController {
-  constructor(private usersServices: UsersService) {}
+export class UserController {
+  constructor(private userService: UserService) {}
 
   @Post()
   @ApiOkResponse({ type: RegisterUserDto })
   async create(@Body() registerUserDto: RegisterUserDto): Promise<UserDto> {
-    return this.usersServices.registerUser(registerUserDto);
+    return this.userService.registerUser(registerUserDto);
   }
 }
