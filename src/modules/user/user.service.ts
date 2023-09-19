@@ -6,7 +6,7 @@ import { Repository } from 'typeorm';
 
 import { AppConstant } from '@/constants/app.constant';
 import { EntityConstant } from '@/constants/entity.constant';
-import { RegisterUserExistException } from '@/shared/exception/entity-exist-exception';
+import { RegisterUserExistException } from '@/shared/exception/register-user-exist.exception';
 
 import { RegisterUserDto } from './dto/register-user.dto';
 import { UserDto } from './dto/user.dto';

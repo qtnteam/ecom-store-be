@@ -1,13 +1,13 @@
 // gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compareSync } from 'bcrypt';
 
 import { JwtConstant } from '@/constants/app.constant';
-import { ValidationMessage } from '@/languages';
 import { User } from '@/modules/user/entities/user.entity';
 import { UserService } from '@/modules/user/user.service';
 import { Payload } from '@/shared/common/type';
+import { LoginFailException } from '@/shared/exception/login-fail.exception';
 
 import { AuthDto } from './dto/auth.dto';
 import { LoginResponseDto } from './dto/login-response.dto';
@@ -22,8 +22,8 @@ export class AuthService {
   async validateUser(identifier: string, password: string): Promise<User> {
     const user = await this.userService.findUserActive(identifier);
 
-    if (!compareSync(password, user.password)) {
-      throw new BadRequestException(ValidationMessage.M_15_invalidLogin);
+    if (!user || !compareSync(password, user.password)) {
+      throw new LoginFailException();
     }
 
     return user;
