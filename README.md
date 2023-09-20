@@ -74,4 +74,9 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ## License
 
+## Prepare data
+- yarn build && yarn m:up
+- yarn batch create-categories
+- yarn build && yarn batch import-master-address
+
 Nest is [MIT licensed](LICENSE).
