@@ -1,5 +1,5 @@
 // gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { RegisterUserDto } from './dto/register-user.dto';
@@ -15,5 +15,10 @@ export class UserController {
   @ApiOkResponse({ type: RegisterUserDto })
   async create(@Body() registerUserDto: RegisterUserDto): Promise<UserDto> {
     return this.userService.registerUser(registerUserDto);
+  }
+
+  @Get()
+  async test() {
+    return this.userService.test();
   }
 }

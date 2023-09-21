@@ -34,7 +34,7 @@ const formatted = (timeZone: string) => {
           }),
         ],
       }),
-      inject: [ConfigService],
+      inject: [ConfigService, AsyncRequestContext],
     }),
   ],
   providers: [QueryLogger],

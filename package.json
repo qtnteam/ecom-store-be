@@ -10,7 +10,7 @@
   },
   "scripts": {
     "postinstall": "husky install",
-    "build": "nest build",
+    "build": "nest build && yarn copy:external-data",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "NODE_ENV=dev nest start --watch",
@@ -28,7 +28,8 @@
     "m:up": "npm run typeorm migration:run",
     "m:r": "npm run typeorm migration:revert",
     "m:g": "npm run typeorm migration:generate",
-    "batch": "node dist/main-cli.js"
+    "batch": "node dist/main-cli.js",
+    "copy:external-data": "cp -r './src/external-data' './dist'"
   },
   "dependencies": {
     "@fastify/passport": "^2.3.0",
@@ -46,6 +47,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "cli-color": "^2.0.3",
+    "csv-parser": "^3.0.0",
     "mysql2": "^3.6.0",
     "nest-commander": "^3.12.0",
     "nest-winston": "^1.9.4",
