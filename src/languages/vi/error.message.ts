@@ -1,4 +1,3 @@
-// gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
 export const ErrorMessage = {
   400: 'Bad Request',
   401: 'Certification failed',

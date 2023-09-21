@@ -1,4 +1,3 @@
-// gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
 import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm';
 
 import { EntityConstant } from '@/constants/entity.constant';

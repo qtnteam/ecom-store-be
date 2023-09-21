@@ -1,4 +1,3 @@
-// gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
 import { green, red, white, yellow } from 'cli-color';
 import { PlatformTools } from 'typeorm/platform/PlatformTools';
 import { format } from 'winston';

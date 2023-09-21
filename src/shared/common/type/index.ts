@@ -1,4 +1,3 @@
-// gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
 import { AsyncLocalStorage } from 'async_hooks';
 import { ValidationError } from 'class-validator';
 import { Logger } from 'winston';

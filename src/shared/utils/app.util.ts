@@ -1,4 +1,3 @@
-// gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
 import * as isEmpty from 'lodash/isEmpty';
 import { v4 } from 'uuid';
 

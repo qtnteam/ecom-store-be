@@ -1,4 +1,3 @@
-// gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
 export const ValidationMessage = {
   isString: '$field phải là chuỗi',
   isArray: '$field phải là mảng',

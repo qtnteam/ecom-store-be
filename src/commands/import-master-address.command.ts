@@ -1,4 +1,3 @@
-// gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
 import { Inject, Logger } from '@nestjs/common';
 import * as csvParser from 'csv-parser';
 import { createReadStream, existsSync, unlinkSync } from 'fs';
