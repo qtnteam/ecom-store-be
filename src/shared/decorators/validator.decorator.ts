@@ -1,4 +1,3 @@
-// gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
 import {
   ArrayMaxSize as _ArrayMaxSize,
   ArrayMinSize as _ArrayMinSize,

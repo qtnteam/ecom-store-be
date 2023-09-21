@@ -1,4 +1,3 @@
-// gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 

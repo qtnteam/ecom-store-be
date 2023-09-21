@@ -1,4 +1,3 @@
-// gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
 export default () => ({
   appEnv: process.env.NODE_ENV,
   appUrl: process.env.APP_URL,

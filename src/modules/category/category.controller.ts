@@ -1,4 +1,3 @@
-// gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
 import { BadRequestException, Controller, Get } from '@nestjs/common';
 
 import { CurrentUserId } from '@/shared/decorators/current-user-id.decorator';

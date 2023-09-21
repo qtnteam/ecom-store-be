@@ -1,4 +1,3 @@
-// gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
 export class AddColumnAccessTokenAndRefreshToken1695032136850

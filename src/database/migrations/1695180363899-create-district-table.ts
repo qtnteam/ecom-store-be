@@ -1,4 +1,3 @@
-// gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
 export class CreateDistrictTable1695180363899 implements MigrationInterface {
@@ -22,10 +21,10 @@ export class CreateDistrictTable1695180363899 implements MigrationInterface {
       ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE utf8mb4_general_ci`,
     );
     await queryRunner.query(
-      `ALTER TABLE \`districts\` 
-        ADD CONSTRAINT \`FK_9d451638507b11822dc411a2dfe\` 
-        FOREIGN KEY (\`province_id\`) 
-        REFERENCES \`provinces\`(\`code\`) 
+      `ALTER TABLE \`districts\`
+        ADD CONSTRAINT \`FK_9d451638507b11822dc411a2dfe\`
+        FOREIGN KEY (\`province_id\`)
+        REFERENCES \`provinces\`(\`code\`)
         ON DELETE NO ACTION ON UPDATE NO ACTION`,
     );
   }

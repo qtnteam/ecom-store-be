@@ -1,4 +1,3 @@
-// gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
 import { ValidationError } from 'class-validator';
 
 import { AbstractDto } from '../common/dto/abstract.dto';
