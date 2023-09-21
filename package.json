@@ -10,7 +10,7 @@
   },
   "scripts": {
     "postinstall": "husky install",
-    "build": "nest build",
+    "build": "nest build && yarn copy:external-data",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "NODE_ENV=dev nest start --watch",
@@ -27,29 +27,50 @@
     "m:c": "typeorm migration:create ./src/database/migrations/$name",
     "m:up": "npm run typeorm migration:run",
     "m:r": "npm run typeorm migration:revert",
-    "m:g": "npm run typeorm migration:generate -n ./src/database/migrations/$name"
+    "m:g": "npm run typeorm migration:generate",
+    "batch": "node dist/main-cli.js",
+    "copy:external-data": "cp -r './src/external-data' './dist'"
   },
   "dependencies": {
+    "@fastify/passport": "^2.3.0",
+    "@fastify/static": "^6.10.2",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.0.0",
     "@nestjs/core": "^10.0.0",
+    "@nestjs/jwt": "^10.1.1",
+    "@nestjs/passport": "^10.0.2",
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/platform-fastify": "^10.2.2",
     "@nestjs/typeorm": "^10.0.0",
+    "@types/bcrypt": "^5.0.0",
+    "bcrypt": "^5.1.1",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
+    "cli-color": "^2.0.3",
+    "csv-parser": "^3.0.0",
     "mysql2": "^3.6.0",
+    "nest-commander": "^3.12.0",
+    "nest-winston": "^1.9.4",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.1",
+    "passport-local": "^1.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
-    "typeorm": "^0.3.17"
+    "typeorm": "^0.3.17",
+    "winston": "^3.10.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
     "@nestjs/cli": "^10.0.0",
     "@nestjs/schematics": "^10.0.0",
+    "@nestjs/swagger": "^7.1.10",
     "@nestjs/testing": "^10.0.0",
     "@types/express": "^4.17.17",
     "@types/jest": "^29.5.2",
     "@types/node": "^20.5.7",
+    "@types/passport-jwt": "^3.0.9",
+    "@types/passport-local": "^1.0.35",
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
@@ -70,22 +91,5 @@
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.1.3"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "rootDir": "src",
-    "testRegex": ".*\\.spec\\.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    },
-    "collectCoverageFrom": [
-      "**/*.(t|j)s"
-    ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
   }
 }

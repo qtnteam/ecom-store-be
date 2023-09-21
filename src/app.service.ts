@@ -1,8 +1,1 @@
-import { Injectable } from '@nestjs/common';
-
-@Injectable()
-export class AppService {
-  getHello(): string {
-    return 'Hello World!';
-  }
-}
+// gkc_hash_code : 01GYS4MFBRHRYQ4ENZEFBHPDA0
