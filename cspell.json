@@ -7,7 +7,8 @@
     "01GYS4MFBRHRYQ4ENZEFBHPDA0",
     "Ho_Chi_Minh",
     "tinyint",
-    "libphonenumber"
+    "libphonenumber",
+    "Dtos"
   ],
   "ignorePaths": [
     "node_modules/**",
