@@ -1,6 +1,6 @@
 import { Inject, Logger } from '@nestjs/common';
 import * as csvParser from 'csv-parser';
-import { createReadStream, existsSync, unlinkSync } from 'fs';
+import { createReadStream, existsSync } from 'fs';
 import { Command, CommandRunner } from 'nest-commander';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { DataSource, EntityManager } from 'typeorm';
@@ -16,7 +16,10 @@ import { chunkArray } from '@/shared/utils/utils';
   description: 'Import master address (province, district, ward)',
 })
 export class ImportMasterAddressCommand extends CommandRunner {
-  private readonly rootPath = __dirname.split('/').slice(0, -1).join('/');
+  private readonly rootPath = __dirname
+    .split(/[\/\\]/)
+    .slice(0, -1)
+    .join('/');
   private readonly path = this.rootPath + '/external-data/master-address';
 
   constructor(
@@ -39,10 +42,6 @@ export class ImportMasterAddressCommand extends CommandRunner {
         this.importDataChunk(csvWardPath, manager),
       ]);
     });
-
-    unlinkSync(csvProvincePath);
-    unlinkSync(csvDistrictPath);
-    unlinkSync(csvWardPath);
 
     this.logger.log('Import master address completed.');
     process.exit(0);
@@ -85,7 +84,6 @@ export class ImportMasterAddressCommand extends CommandRunner {
           .on('end', async () => {
             values.length &&
               (await this.insertDataInChunks(District, values, manager));
-            unlinkSync(csvPath);
             resolve();
           })
           .on('error', (error) => {
@@ -116,7 +114,6 @@ export class ImportMasterAddressCommand extends CommandRunner {
           .on('end', async () => {
             values.length &&
               (await this.insertDataInChunks(Ward, values, manager));
-            unlinkSync(csvPath);
             resolve();
           })
           .on('error', (error) => {
@@ -144,7 +141,6 @@ export class ImportMasterAddressCommand extends CommandRunner {
         .on('end', async () => {
           values.length &&
             (await this.insertDataInChunks(Province, values, manager));
-          unlinkSync(csvPath);
           resolve();
         })
         .on('error', (error) => {
