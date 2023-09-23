@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Expose } from 'class-transformer';
 
 import { EntityConstant } from '@/constants/entity.constant';
@@ -29,5 +30,6 @@ export class RegisterUserDto {
 
   @Expose()
   @IsPassword()
+  @ApiProperty()
   password: string;
 }
