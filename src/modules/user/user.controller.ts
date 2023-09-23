@@ -1,5 +1,7 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Post } from '@nestjs/common';
+import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+
+import { Public } from '@/shared/decorators/public.decorator';
 
 import { RegisterUserDto } from './dto/register-user.dto';
 import { UserDto } from './dto/user.dto';
@@ -11,13 +13,10 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @Post()
+  @Public()
+  @ApiBody({ type: RegisterUserDto })
   @ApiOkResponse({ type: RegisterUserDto })
   async create(@Body() registerUserDto: RegisterUserDto): Promise<UserDto> {
     return this.userService.registerUser(registerUserDto);
-  }
-
-  @Get()
-  async test() {
-    return this.userService.test();
   }
 }

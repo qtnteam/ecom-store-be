@@ -75,14 +75,4 @@ export class UserService {
   ): Promise<void> {
     await this.userRepository.update(id, { accessToken, refreshToken });
   }
-
-  async test(provinceId = '01') {
-    const de = await this.dRepository
-      .createQueryBuilder('a')
-      .innerJoinAndSelect('a.province', 'p')
-      .where('a.provinceId = :provinceId', { provinceId })
-      .getMany();
-
-    return de;
-  }
 }
