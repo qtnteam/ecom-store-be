@@ -4,6 +4,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 
 import { JwtConstant } from '@/constants/app.constant';
+import { TokenModule } from '@/modules/token/token.module';
 import { UserModule } from '@/modules/user/user.module';
 
 import { AuthController } from './auth.controller';
@@ -29,6 +30,7 @@ import { LocalStrategy } from './strategies/local.strategy';
     }),
     PassportModule,
     UserModule,
+    TokenModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, LocalStrategy, JwtStrategy],

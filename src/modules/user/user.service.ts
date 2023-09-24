@@ -62,17 +62,14 @@ export class UserService {
     );
 
     if (accessToken) {
-      queryBuilder.andWhere('u.access_token = :accessToken', { accessToken });
+      queryBuilder
+        .innerJoin('u.tokens', 'token')
+        .andWhere('token.access_token = :accessToken', { accessToken })
+        .andWhere('token.access_token_expires_on >= :currentDate', {
+          currentDate: new Date(),
+        });
     }
 
     return queryBuilder.getOne();
-  }
-
-  async updateToken(
-    id: string,
-    accessToken: string,
-    refreshToken: string,
-  ): Promise<void> {
-    await this.userRepository.update(id, { accessToken, refreshToken });
   }
 }
