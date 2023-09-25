@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { compareSync } from 'bcrypt';
 
 import { JwtConstant } from '@/constants/app.constant';
+import { TokenService } from '@/modules/token/token.service';
 import { User } from '@/modules/user/entities/user.entity';
 import { UserService } from '@/modules/user/user.service';
 import { Payload } from '@/shared/common/type';
@@ -16,6 +17,7 @@ export class AuthService {
   constructor(
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
+    private readonly tokenService: TokenService,
   ) {}
 
   async validateUser(identifier: string, password: string): Promise<User> {
@@ -41,13 +43,13 @@ export class AuthService {
       (this.jwtService.decode(refreshToken) as Payload).exp * 1000,
     );
 
-    await this.userService.updateToken(user.id, accessToken, refreshToken);
-
-    return {
+    const tokenResponse = {
       accessToken,
       refreshToken,
       accessTokenExpiresOn,
       refreshTokenExpiresOn,
     };
+
+    return this.tokenService.createToken(user.id, tokenResponse);
   }
 }

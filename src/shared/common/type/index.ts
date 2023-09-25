@@ -37,3 +37,10 @@ export type Payload = {
   iat: number;
   sub: string;
 };
+
+export type TokenResponse = {
+  accessToken: string;
+  refreshToken: string;
+  accessTokenExpiresOn: Date;
+  refreshTokenExpiresOn: Date;
+};

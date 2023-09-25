@@ -2,6 +2,7 @@ import { Column, Entity, OneToMany } from 'typeorm';
 
 import { EntityConstant } from '@/constants/entity.constant';
 import { Store } from '@/modules/store/entities/store.entity';
+import { Token } from '@/modules/token/entities/token.entity';
 import { AbstractEntity } from '@/shared/common/base.entity';
 import { UseDto } from '@/shared/decorators/use-dto.decorator';
 import { IAbstractEntity } from '@/shared/interfaces';
@@ -16,6 +17,9 @@ export class User
 {
   @OneToMany(() => Store, (store) => store.user)
   stores: Store[];
+
+  @OneToMany(() => Token, (token) => token.user)
+  tokens: Token[];
 
   @Column({
     name: 'username',
@@ -46,20 +50,4 @@ export class User
     length: EntityConstant.EntityShortLength,
   })
   password: string;
-
-  @Column({
-    name: 'access_token',
-    type: 'varchar',
-    length: EntityConstant.EntityLongLength,
-    nullable: true,
-  })
-  accessToken: string;
-
-  @Column({
-    name: 'refresh_token',
-    type: 'varchar',
-    length: EntityConstant.EntityLongLength,
-    nullable: true,
-  })
-  refreshToken: string;
 }
