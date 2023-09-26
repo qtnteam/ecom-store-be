@@ -10,8 +10,8 @@ import { StoreService } from './store.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Store, User, District])],
-  providers: [StoreService],
   controllers: [StoreController],
+  providers: [StoreService],
   exports: [StoreService],
 })
 export class StoreModule {}

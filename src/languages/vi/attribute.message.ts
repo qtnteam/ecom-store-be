@@ -20,4 +20,8 @@ export const Attributes = {
     thumbnail: 'Ảnh đại diện cửa hàng',
     description: 'Mô tả cửa hàng',
   },
+
+  StoreCollection: {
+    name: 'Tên danh mục',
+  },
 };

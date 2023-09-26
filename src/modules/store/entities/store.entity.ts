@@ -9,6 +9,7 @@ import {
 
 import { EntityConstant } from '@/constants/entity.constant';
 import { StoreAddress } from '@/modules/store-address/entities/store-address.entity';
+import { StoreCollection } from '@/modules/store-collection/entities/store-collection.entity';
 import { User } from '@/modules/user/entities/user.entity';
 import { AbstractEntity } from '@/shared/common/base.entity';
 import { UseDto } from '@/shared/decorators/use-dto.decorator';
@@ -29,6 +30,9 @@ export class Store
 
   @OneToMany(() => StoreAddress, (storeAddress) => storeAddress.store)
   storeAddresses: StoreAddress[];
+
+  @OneToMany(() => StoreCollection, (storeCollection) => storeCollection.store)
+  storeCollections: StoreCollection[];
 
   @Column({
     name: 'user_id',

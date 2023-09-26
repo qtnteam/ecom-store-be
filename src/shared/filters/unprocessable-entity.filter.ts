@@ -47,10 +47,25 @@ export class UnprocessableEntityExceptionFilter
     return response.code(status).send(error);
   }
 
-  private validationFilter(validationErrors: IndexedValidationError[]) {
+  private validationFilter(validationErrors: IndexedValidationError[] | any[]) {
     return validationErrors.map((error) => {
-      const { property, constraints, contexts, children, target, index } =
-        error;
+      const {
+        property,
+        errorMessage,
+        constraints,
+        contexts,
+        children,
+        target,
+        index,
+      } = error;
+
+      if (property && errorMessage) {
+        return {
+          index,
+          property,
+          message: errorMessage,
+        };
+      }
 
       if (!constraints && children && !isEmpty(children)) {
         return {
