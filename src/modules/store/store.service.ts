@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { ExistFieldConstant } from '@/constants/exist-field.constant';
+import { Attributes } from '@/languages';
 import { ValidationMessage } from '@/languages/vi/validation.message';
 import { ExistFieldException } from '@/shared/exception/exist-field.exception';
 import { ExistObjectException } from '@/shared/exception/exist-object.exception';
@@ -41,15 +42,15 @@ export class StoreService {
         ExistFieldConstant.StoreRegisterFieldCheckExists.filter(
           (field) => storeIdentifierExits[field] === eval(field),
         );
-      throw new ExistFieldException(fieldExists);
+      throw new ExistFieldException(fieldExists, Attributes.Store);
     }
 
     const store = this.storeRepository.create({
-      name: name,
-      identifier: identifier,
-      thumbnail: thumbnail,
-      description: description,
-      userId: userId,
+      name,
+      identifier,
+      thumbnail,
+      description,
+      userId,
     });
 
     await this.storeRepository.save(store);

@@ -25,6 +25,7 @@ export class User
     name: 'username',
     type: 'varchar',
     length: EntityConstant.EntityShortLength,
+    unique: true,
   })
   username: string;
 

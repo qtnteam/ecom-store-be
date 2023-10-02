@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 
 import { AppConstant } from '@/constants/app.constant';
 import { ExistFieldConstant } from '@/constants/exist-field.constant';
+import { Attributes } from '@/languages';
 import { District } from '@/modules/district/entities/district.entity';
 import { ExistFieldException } from '@/shared/exception/exist-field.exception';
 
@@ -36,7 +37,7 @@ export class UserService {
       const fieldExists = ExistFieldConstant.RegisterFieldCheckExists.filter(
         (field) => userExits[field] === eval(field),
       );
-      throw new ExistFieldException(fieldExists);
+      throw new ExistFieldException(fieldExists, Attributes.User);
     }
 
     const user = this.userRepository.create({

@@ -15,7 +15,7 @@ export class UserController {
   @Post()
   @Public()
   @ApiBody({ type: RegisterUserDto })
-  @ApiOkResponse({ type: RegisterUserDto })
+  @ApiOkResponse({ type: UserDto })
   async create(@Body() registerUserDto: RegisterUserDto): Promise<UserDto> {
     return this.userService.registerUser(registerUserDto);
   }

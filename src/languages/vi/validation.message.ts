@@ -25,7 +25,7 @@ export const ValidationMessage = {
   M_16_phoneRule: 'Chỉ có thể sử dụng các số có nửa độ rộng và số $1~$2.',
   M_17_isPositive: 'Vui lòng nhập số nguyên không dấu',
   M_18_invalidEmail: 'Vui lòng nhập địa chỉ email hợp lệ',
-  M_19_userNameRule: 'Thông tin tài khoản không chứa kí tự đặc biệt',
+  M_19_identifierRule: '$field không chứa kí tự đặc biệt và khoảng trắng',
   M_20_existField: '$field đã tồn tại',
   M_21_existObjectCommon: 'Các đối tượng đã có sẵn không thể tạo mới',
   M_22_existStore: 'Tài khoản đã tồn tại cửa hàng',

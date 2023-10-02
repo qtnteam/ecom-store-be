@@ -8,8 +8,8 @@ import {
   StringField,
 } from '@/shared/decorators/field.decorator';
 import {
+  IsIdentifier,
   IsPassword,
-  IsUserName,
 } from '@/shared/decorators/validator.decorator';
 export class RegisterUserDto {
   @Expose()
@@ -17,7 +17,7 @@ export class RegisterUserDto {
     minLength: EntityConstant.EntityPasswordMinLength,
     maxLength: EntityConstant.EntityPasswordMaxLength,
   })
-  @IsUserName()
+  @IsIdentifier()
   username: string;
 
   @Expose()
