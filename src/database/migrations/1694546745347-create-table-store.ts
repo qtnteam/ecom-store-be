@@ -21,6 +21,12 @@ export class CreateTableStore1694546745347 implements MigrationInterface {
         ) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE utf8mb4_general_ci`,
     );
     await queryRunner.query(
+      `ALTER TABLE \`stores\` ADD UNIQUE INDEX \`IDX_29f39971656b4bf7832b7476d1\` (\`user_id\`)`,
+    );
+    await queryRunner.query(
+      `CREATE UNIQUE INDEX \`REL_29f39971656b4bf7832b7476d1\` ON \`stores\` (\`user_id\`)`,
+    );
+    await queryRunner.query(
       `ALTER TABLE \`stores\` ADD CONSTRAINT \`FK_29f39971656b4bf7832b7476d10\` FOREIGN KEY (\`user_id\`) REFERENCES \`users\`(\`id\`) ON DELETE NO ACTION ON UPDATE NO ACTION`,
     );
   }
@@ -28,6 +34,12 @@ export class CreateTableStore1694546745347 implements MigrationInterface {
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
       `ALTER TABLE \`stores\` DROP FOREIGN KEY \`FK_29f39971656b4bf7832b7476d10\``,
+    );
+    await queryRunner.query(
+      `DROP INDEX \`REL_29f39971656b4bf7832b7476d1\` ON \`stores\``,
+    );
+    await queryRunner.query(
+      `ALTER TABLE \`stores\` DROP INDEX \`IDX_29f39971656b4bf7832b7476d1\``,
     );
     await queryRunner.query(
       `DROP INDEX \`IDX_ad98b8815a66c29442fe90b0eb\` ON \`stores\``,
