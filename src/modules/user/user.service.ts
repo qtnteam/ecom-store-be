@@ -4,9 +4,9 @@ import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 
 import { AppConstant } from '@/constants/app.constant';
-import { EntityConstant } from '@/constants/entity.constant';
+import { ExistFieldConstant } from '@/constants/exist-field.constant';
 import { District } from '@/modules/district/entities/district.entity';
-import { RegisterUserExistException } from '@/shared/exception/register-user-exist.exception';
+import { ExistFieldException } from '@/shared/exception/exist-field.exception';
 
 import { RegisterUserDto } from './dto/register-user.dto';
 import { UserDto } from './dto/user.dto';
@@ -33,10 +33,10 @@ export class UserService {
     });
 
     if (userExits) {
-      const fieldExists = EntityConstant.RegisterFieldCheckExists.filter(
+      const fieldExists = ExistFieldConstant.RegisterFieldCheckExists.filter(
         (field) => userExits[field] === eval(field),
       );
-      throw new RegisterUserExistException(fieldExists);
+      throw new ExistFieldException(fieldExists);
     }
 
     const user = this.userRepository.create({

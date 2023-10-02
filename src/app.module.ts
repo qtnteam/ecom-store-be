@@ -4,6 +4,7 @@ import { AsyncRequestContextModule } from './async-request-context/async-request
 import { AuthModule } from './auth/auth.module';
 import { DatabaseModule } from './database.module';
 import { CategoryModule } from './modules/category/category.module';
+import { StoreModule } from './modules/store/store.module';
 import { UserModule } from './modules/user/user.module';
 
 @Module({
@@ -13,6 +14,7 @@ import { UserModule } from './modules/user/user.module';
     DatabaseModule,
     CategoryModule,
     UserModule,
+    StoreModule,
   ],
 })
 export class AppModule {}

@@ -11,5 +11,4 @@ export const EntityConstant = {
   // Other
   TimePrecision: 0,
   EntityPhoneLength: 12,
-  RegisterFieldCheckExists: ['username', 'phoneNumber', 'email'],
 };
