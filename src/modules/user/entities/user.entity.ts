@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany } from 'typeorm';
+import { Column, Entity, OneToMany, OneToOne } from 'typeorm';
 
 import { EntityConstant } from '@/constants/entity.constant';
 import { Store } from '@/modules/store/entities/store.entity';
@@ -15,8 +15,8 @@ export class User
   extends AbstractEntity<UserDto>
   implements IAbstractEntity<UserDto>
 {
-  @OneToMany(() => Store, (store) => store.user)
-  stores: Store[];
+  @OneToOne(() => Store, (store) => store.user)
+  store: Store;
 
   @OneToMany(() => Token, (token) => token.user)
   tokens: Token[];

@@ -3,8 +3,8 @@ import {
   Entity,
   Index,
   JoinColumn,
-  ManyToOne,
   OneToMany,
+  OneToOne,
 } from 'typeorm';
 
 import { EntityConstant } from '@/constants/entity.constant';
@@ -23,7 +23,7 @@ export class Store
   extends AbstractEntity<StoreDto>
   implements IAbstractEntity<StoreDto>
 {
-  @ManyToOne(() => User, (user) => user.stores)
+  @OneToOne(() => User, (user) => user.store)
   @JoinColumn({ name: 'user_id' })
   user: User;
 
