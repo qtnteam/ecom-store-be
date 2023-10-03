@@ -52,6 +52,15 @@ export class StoreCollectionService {
     return newStoreCollection.toDto();
   }
 
+  async findOneById(id: string, storeId: string): Promise<StoreCollectionDto> {
+    const storeCollection = await this.storeCollectionRepo.findOneOrFail({
+      where: { id, storeId },
+      select: ['id', 'name', 'thumbnail', 'status'],
+    });
+
+    return storeCollection.toDto();
+  }
+
   async paginate(
     storeId: string,
     pageOptionsDto: StoreCollectionPageOptionsDto,
