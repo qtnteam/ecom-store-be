@@ -2,6 +2,7 @@ import { Expose } from 'class-transformer';
 
 import { EntityConstant } from '@/constants/entity.constant';
 import { StringField } from '@/shared/decorators/field.decorator';
+import { IsIdentifier } from '@/shared/decorators/validator.decorator';
 
 export class RegisterStoreDto {
   @Expose()
@@ -14,6 +15,7 @@ export class RegisterStoreDto {
   @StringField({
     maxLength: EntityConstant.EntityShortLength,
   })
+  @IsIdentifier()
   identifier: string;
 
   @Expose()

@@ -1,5 +1,5 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 import { CurrentUserId } from '@/shared/decorators/current-user-id.decorator';
 
@@ -13,7 +13,8 @@ export class StoreController {
   constructor(private storeService: StoreService) {}
 
   @Post()
-  @ApiOkResponse({ type: RegisterStoreDto })
+  @ApiBody({ type: RegisterStoreDto })
+  @ApiOkResponse({ type: StoreDto })
   async create(
     @Body() registerStoreDto: RegisterStoreDto,
     @CurrentUserId() userId: string,
