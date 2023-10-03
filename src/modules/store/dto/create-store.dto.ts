@@ -4,7 +4,7 @@ import { EntityConstant } from '@/constants/entity.constant';
 import { StringField } from '@/shared/decorators/field.decorator';
 import { IsIdentifier } from '@/shared/decorators/validator.decorator';
 
-export class RegisterStoreDto {
+export class CreateStoreDto {
   @Expose()
   @StringField({
     maxLength: EntityConstant.EntityShortLength,

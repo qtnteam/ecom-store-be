@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { EntityNotFoundError, FindOptionsWhere, Repository } from 'typeorm';
 
 import { ExistFieldConstant } from '@/constants/exist-field.constant';
 import { Attributes } from '@/languages';
@@ -8,7 +8,7 @@ import { ValidationMessage } from '@/languages/vi/validation.message';
 import { ExistFieldException } from '@/shared/exception/exist-field.exception';
 import { ExistObjectException } from '@/shared/exception/exist-object.exception';
 
-import { RegisterStoreDto } from './dto/register-store.dto';
+import { CreateStoreDto } from './dto/create-store.dto';
 import { StoreDto } from './dto/store.dto';
 import { Store } from './entities/store.entity';
 
@@ -19,11 +19,11 @@ export class StoreService {
     private readonly storeRepository: Repository<Store>,
   ) {}
 
-  async registerStore(
-    registerStoreDto: RegisterStoreDto,
+  async createStore(
+    createStoreDto: CreateStoreDto,
     userId: string,
   ): Promise<StoreDto> {
-    const { name, identifier, thumbnail, description } = registerStoreDto;
+    const { name, identifier, thumbnail, description } = createStoreDto;
 
     const userIsExistsStore = await this.storeRepository.findOne({
       where: [{ userId: userId }],
@@ -56,5 +56,15 @@ export class StoreService {
     await this.storeRepository.save(store);
 
     return store.toDto();
+  }
+
+  async findOneBy(where: FindOptionsWhere<Store>): Promise<Store> {
+    const store = await this.storeRepository.findOneBy(where);
+
+    if (!store) {
+      throw new EntityNotFoundError(Store.name, undefined);
+    }
+
+    return store;
   }
 }
