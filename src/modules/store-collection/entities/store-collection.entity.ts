@@ -30,6 +30,7 @@ export class StoreCollection
   @Column({
     name: 'thumbnail',
     type: 'varchar',
+    nullable: true,
     length: EntityConstant.EntityLongLength,
   })
   thumbnail: string;

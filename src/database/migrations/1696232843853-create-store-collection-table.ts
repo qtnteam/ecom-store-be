@@ -13,7 +13,7 @@ export class CreateStoreCollectionTable1696232843853
         \`updated_at\` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE NOW(),
         \`deleted_at\` datetime(0) NULL,
         \`name\` varchar(255) NOT NULL,
-        \`thumbnail\` varchar(2000) NOT NULL,
+        \`thumbnail\` varchar(2000) NULL,
         \`status\` tinyint UNSIGNED NOT NULL DEFAULT '0',
         \`index\` int NOT NULL DEFAULT '0',
         \`store_id\` varchar(255) NOT NULL,
