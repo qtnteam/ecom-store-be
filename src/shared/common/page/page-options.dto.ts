@@ -12,8 +12,8 @@ export class PageOptionsDto {
   @NumberFieldOptional({ minimum: 1, default: 1, int: true })
   readonly page?: number = 1;
 
-  @NumberFieldOptional({ minimum: 1, maximum: 50, default: 50, int: true })
-  readonly take?: number = 50;
+  @NumberFieldOptional({ minimum: 1, maximum: 15, default: 15, int: true })
+  readonly take?: number = 15;
 
   @StringFieldOptional()
   readonly q?: string;

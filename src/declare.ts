@@ -14,7 +14,7 @@ declare global {
     toPageDto<Dto extends AbstractDto>(
       this: T[],
       pageMetaDto: PageMetaDto,
-      options: unknown,
+      options?: unknown,
     ): PageDto<Dto>;
   }
 }

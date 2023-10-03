@@ -1,3 +1,5 @@
+import './declare';
+
 import { Module } from '@nestjs/common';
 
 import { AsyncRequestContextModule } from './async-request-context/async-request-context.module';
