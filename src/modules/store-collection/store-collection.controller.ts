@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { ApiBody, ApiOkResponse, ApiParam, ApiTags } from '@nestjs/swagger';
 
 import { PageDto } from '@/shared/common/page/page.dto';
@@ -7,6 +16,7 @@ import { CurrentUserId } from '@/shared/decorators/current-user-id.decorator';
 
 import { StoreService } from '../store/store.service';
 import { CreateStoreCollectionDto } from './dto/create-store-collection.dto';
+import { RemoveStoreCollectionDto } from './dto/remove-store-collection.dto';
 import { StoreCollectionDto } from './dto/store-collection.dto';
 import { StoreCollectionPageOptionsDto } from './dto/store-collection-page-options.dto';
 import { UpdateStoreCollectionDto } from './dto/update-store-collection.dto';
@@ -39,6 +49,7 @@ export class StoreCollectionController {
 
   @Get()
   @ApiParam({ name: 'store_id', type: 'string' })
+  @ApiBody({ type: StoreCollectionPageOptionsDto })
   @ApiPageOkResponse({ type: StoreCollectionDto })
   async findAll(
     @CurrentUserId() userId: string,
@@ -67,6 +78,7 @@ export class StoreCollectionController {
   @Put(':id')
   @ApiParam({ name: 'store_id', type: 'string' })
   @ApiParam({ name: 'id', type: 'string' })
+  @ApiBody({ type: UpdateStoreCollectionDto })
   @ApiOkResponse({ type: StoreCollectionDto })
   async update(
     @CurrentUserId() userId: string,
@@ -80,6 +92,22 @@ export class StoreCollectionController {
       id,
       storeId,
       updateStoreCollectionDto,
+    );
+  }
+
+  @Delete()
+  @ApiParam({ name: 'store_id', type: 'string' })
+  @ApiBody({ type: RemoveStoreCollectionDto })
+  async remove(
+    @CurrentUserId() userId: string,
+    @Param('store_id') storeId: string,
+    @Body() removeStoreCollectionDto: RemoveStoreCollectionDto,
+  ): Promise<void> {
+    await this.storeService.findOneBy({ id: storeId, userId });
+
+    return this.storeCollectionService.remove(
+      storeId,
+      removeStoreCollectionDto,
     );
   }
 }

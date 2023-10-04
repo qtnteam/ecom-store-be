@@ -9,6 +9,7 @@ import { PageDto } from '@/shared/common/page/page.dto';
 import { ExistFieldException } from '@/shared/exception/exist-field.exception';
 
 import { CreateStoreCollectionDto } from './dto/create-store-collection.dto';
+import { RemoveStoreCollectionDto } from './dto/remove-store-collection.dto';
 import { StoreCollectionDto } from './dto/store-collection.dto';
 import { StoreCollectionPageOptionsDto } from './dto/store-collection-page-options.dto';
 import { UpdateStoreCollectionDto } from './dto/update-store-collection.dto';
@@ -70,6 +71,19 @@ export class StoreCollectionService {
     }
 
     return this.findOneById(id, storeId);
+  }
+
+  async remove(
+    storeId: string,
+    removeStoreCollectionDto: RemoveStoreCollectionDto,
+  ): Promise<void> {
+    const { ids } = removeStoreCollectionDto;
+
+    await this.storeCollectionRepo
+      .createQueryBuilder()
+      .softDelete()
+      .where({ id: In(ids), storeId })
+      .execute();
   }
 
   async findOneById(id: string, storeId: string): Promise<StoreCollectionDto> {

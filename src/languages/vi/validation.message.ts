@@ -1,4 +1,5 @@
 export const ValidationMessage = {
+  isUUID: '$field phải là kiểu dữ liệu UUID',
   isString: '$field phải là chuỗi',
   isArray: '$field phải là mảng',
   isBoolean: '$field phải là giá trị boolean',

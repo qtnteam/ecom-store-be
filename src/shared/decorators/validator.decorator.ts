@@ -9,6 +9,7 @@ import {
   IsNumber as _IsNumber,
   IsPhoneNumber as isPhoneNumber,
   IsString as _IsString,
+  IsUUID as _IsUUID,
   Max as _Max,
   MaxLength as _MaxLength,
   Min as _Min,
@@ -183,6 +184,11 @@ export const ArrayMaxSize = (
         : { ...options, ...{ context: { value: minValue } } },
     ),
   });
+
+export const IsUUID = (
+  options?: string | ValidationOptions,
+): PropertyDecorator =>
+  _IsUUID('all', { message: ValidationMessage.isUUID, ...makeOption(options) });
 
 export const IsString = (
   options?: string | ValidationOptions,
