@@ -34,6 +34,7 @@ import {
   IsPhoneNumber,
   IsString,
   IsUndefinable,
+  IsUUID,
   Max,
   MaxLength,
   Min,
@@ -104,6 +105,33 @@ export const NumberFieldOptional = (
     IsUndefinable(),
     NumberField({ required: false, nullable: true, ...options }),
   );
+};
+
+export const UUIDField = (
+  options: Omit<ApiPropertyOptions, 'type'> & IFieldOptions = {},
+): PropertyDecorator => {
+  const propertyDecorators = [Type(() => String)];
+
+  if (options.nullable) {
+    propertyDecorators.push(
+      IsNullable({ each: options.each }),
+      IsOptional({ each: options.each }),
+    );
+  } else {
+    const option = { each: options.each };
+
+    propertyDecorators.push(IsNotEmpty(option));
+  }
+
+  propertyDecorators.push(IsUUID({ each: options.each }));
+
+  if (options.swagger !== false) {
+    propertyDecorators.push(
+      ApiProperty({ type: String, ...options, isArray: options.each }),
+    );
+  }
+
+  return applyDecorators(...propertyDecorators);
 };
 
 export const StringField = (
