@@ -43,7 +43,7 @@ import {
 export const NumberField = (
   options: Omit<ApiPropertyOptions, 'type'> &
     INumberFieldOptions &
-    IArrayFieldOptions,
+    IArrayFieldOptions = {},
 ): PropertyDecorator => {
   const propertyDecorators = [Type(() => Number)];
 

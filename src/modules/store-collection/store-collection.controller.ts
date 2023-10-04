@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { ApiBody, ApiOkResponse, ApiParam, ApiTags } from '@nestjs/swagger';
 
 import { PageDto } from '@/shared/common/page/page.dto';
@@ -9,6 +9,7 @@ import { StoreService } from '../store/store.service';
 import { CreateStoreCollectionDto } from './dto/create-store-collection.dto';
 import { StoreCollectionDto } from './dto/store-collection.dto';
 import { StoreCollectionPageOptionsDto } from './dto/store-collection-page-options.dto';
+import { UpdateStoreCollectionDto } from './dto/update-store-collection.dto';
 import { StoreCollectionService } from './store-collection.service';
 
 @ApiTags('Store collection')
@@ -61,5 +62,24 @@ export class StoreCollectionController {
     await this.storeService.findOneBy({ id: storeId, userId });
 
     return this.storeCollectionService.findOneById(id, storeId);
+  }
+
+  @Put(':id')
+  @ApiParam({ name: 'store_id', type: 'string' })
+  @ApiParam({ name: 'id', type: 'string' })
+  @ApiOkResponse({ type: StoreCollectionDto })
+  async update(
+    @CurrentUserId() userId: string,
+    @Param('store_id') storeId: string,
+    @Param('id') id: string,
+    @Body() updateStoreCollectionDto: UpdateStoreCollectionDto,
+  ): Promise<StoreCollectionDto> {
+    await this.storeService.findOneBy({ id: storeId, userId });
+
+    return this.storeCollectionService.update(
+      id,
+      storeId,
+      updateStoreCollectionDto,
+    );
   }
 }
