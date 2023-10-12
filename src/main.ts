@@ -40,7 +40,11 @@ async function bootstrap() {
   app.enableCors({
     origin:
       config.get<string>('appEnv') === AppConstant.dev
-        ? [config.get('appUrl'), 'https://localhost:3000']
+        ? [
+            config.get('appUrl'),
+            'https://localhost:3000',
+            'http://localhost:4000',
+          ]
         : config.get('appUrl'),
     methods: ['GET', 'POST', 'PUT', 'PATCH'],
     credentials: true,

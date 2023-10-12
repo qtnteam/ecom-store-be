@@ -23,7 +23,7 @@ export const ValidationMessage = {
     'Vui lòng sử dụng ít nhất 8 ký tự và kết hợp chữ hoa và chữ thường, số và ký hiệu.',
   M_14_passwordConfirmNotMatch: 'Mật khẩu đã nhập không khớp',
   M_15_invalidLogin: 'Sai thông tin đăng nhập',
-  M_16_phoneRule: 'Chỉ có thể sử dụng các số có nửa độ rộng và số $1~$2.',
+  M_16_phoneRule: 'Số điện thoại không hợp lệ',
   M_17_isPositive: 'Vui lòng nhập số nguyên không dấu',
   M_18_invalidEmail: 'Vui lòng nhập địa chỉ email hợp lệ',
   M_19_identifierRule: '$field không chứa kí tự đặc biệt và khoảng trắng',
