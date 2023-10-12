@@ -15,7 +15,6 @@ import {
 } from '../interfaces';
 import { ApiEnumProperty } from './property.decorator';
 import {
-  PhoneNumberSerializer,
   ToArray,
   ToBoolean,
   ToLowerCase,
@@ -31,7 +30,6 @@ import {
   IsNotEmpty,
   IsNullable,
   IsNumber,
-  IsPhoneNumber,
   IsString,
   IsUndefinable,
   IsUUID,
@@ -269,34 +267,5 @@ export const EmailField = (
   return applyDecorators(
     StringField({ toLowerCase: true, ...options }),
     IsEmail({}, { message: ValidationMessage.M_18_invalidEmail }),
-  );
-};
-
-export const PhoneField = (
-  options: Omit<ApiPropertyOptions, 'type'> & IFieldOptions = {},
-): PropertyDecorator => {
-  const decorators = [
-    IsNotEmpty(),
-    IsPhoneNumber({ region: 'VN' }),
-    PhoneNumberSerializer(),
-  ];
-
-  options.nullable
-    ? decorators.push(IsNullable())
-    : decorators.push(IsNotEmpty({ each: options.each }));
-
-  if (options.swagger !== false) {
-    decorators.push(ApiProperty({ type: String, ...options }));
-  }
-
-  return applyDecorators(...decorators);
-};
-
-export const PhoneFieldOptional = (
-  options: Omit<ApiPropertyOptions, 'type' | 'required'> & IFieldOptions = {},
-): PropertyDecorator => {
-  return applyDecorators(
-    IsUndefinable(),
-    PhoneField({ required: false, ...options }),
   );
 };

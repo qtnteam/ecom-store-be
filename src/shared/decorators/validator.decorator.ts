@@ -7,7 +7,6 @@ import {
   IsInt as _IsInt,
   IsNotEmpty as _IsNotEmpty,
   IsNumber as _IsNumber,
-  IsPhoneNumber as isPhoneNumber,
   IsString as _IsString,
   IsUUID as _IsUUID,
   Max as _Max,
@@ -36,6 +35,28 @@ export const IsPassword = (options?: ValidationOptions): PropertyDecorator => {
       validator: {
         validate(value: string) {
           return RegexConstant.PasswordFormat.test(value);
+        },
+      },
+    });
+  };
+};
+
+export const IsPhoneNumber = (
+  options?: ValidationOptions,
+): PropertyDecorator => {
+  return (object, propertyName: string) => {
+    registerDecorator({
+      propertyName,
+      name: 'isPhoneNumber',
+      target: object.constructor,
+      constraints: [],
+      options: {
+        ...options,
+        message: ValidationMessage.M_16_phoneRule,
+      },
+      validator: {
+        validate(value: string) {
+          return RegexConstant.PhoneNumberFormat.test(value);
         },
       },
     });
@@ -209,17 +230,6 @@ export const IsEnum = (
     ...makeOption(options),
   });
 };
-
-export function IsPhoneNumber(
-  options?: ValidationOptions & {
-    region?: Parameters<typeof isPhoneNumber>[0];
-  },
-): PropertyDecorator {
-  return isPhoneNumber(options?.region, {
-    message: ValidationMessage.M_16_phoneRule,
-    ...options,
-  });
-}
 
 export const MinLength = (
   minValue: number,
